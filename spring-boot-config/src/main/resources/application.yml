@@ -1,0 +1,43 @@
+#激活指定profile (执行顺序先后:越大的越后执行,相同属性的就覆盖掉前面得了) java -jar > vm options/program arguments(不太清楚) > application-xxx.properties > yml
+#1.2在yml文件中使用文档块(文档块使用---区分)
+#2.运行时使用命令行参数(依然需要不同的application-xxx.properties或者yml文件中定义文档块) --spring.profiles.active=xxx
+#2.1 运行程序时 Edit Configurations -> Configuration -> Program arguments --spring.profiles.active=xxx
+#2.2 运行jar包时 Maven -> package -> cmd(打出的jar包所在目录) -> java -jar spring-boot-config-0.0.1-SNAPSHOT.jar --spring.profiles.active=xxx
+#3.虚拟机参数(依然需要不同的application-xxx.properties或者yml文件中定义文档块) Edit Configurations -> Configuration -> VM Options -Dspring.profiles.active=dev
+server:
+  port: 8081
+#指定不存在的使用的是默认的8081
+spring:
+  profiles:
+    active: prod2
+---
+
+server:
+  port: 8083
+#spring.profiles: dev 定义该文档块环境
+#properties跟yml中dev名字不同,用谁就是谁
+spring:
+  profiles: dev2
+---
+
+server:
+  port: 8084
+#properties跟yml中prod名字相同,使用的是application-prod.properties中的(先执行yml,再执行properties,都有,因为properties后执行,所以是properties中的)
+spring:
+  profiles: prod
+---
+
+#person:
+#  #last-name==lastName,-后默认字母大写
+#  #lastName: licc
+#  last-name: playmaker
+#  age: 18
+#  boss: false
+#  birth: 2018/12/12
+#  maps: {k1: v1, k2: v2}
+#  lists:
+#    - licc
+#    - playmaker
+#  dog:
+#    name: 小狗
+#    age: 2
