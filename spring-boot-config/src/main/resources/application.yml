@@ -1,4 +1,4 @@
-#激活指定profile (执行顺序先后:越大的越后执行,相同属性的就覆盖掉前面得了) java -jar > vm options/program arguments(不太清楚) > application-xxx.properties > yml
+#激活指定profile (执行顺序先后:越大的越后执行,相同属性的就覆盖掉先执行的了) java -jar > vm options/program arguments(这两个不太清楚) > application-xxx.properties > yml
 #1.2在yml文件中使用文档块(文档块使用---区分)
 #2.运行时使用命令行参数(依然需要不同的application-xxx.properties或者yml文件中定义文档块) --spring.profiles.active=xxx
 #2.1 运行程序时 Edit Configurations -> Configuration -> Program arguments --spring.profiles.active=xxx

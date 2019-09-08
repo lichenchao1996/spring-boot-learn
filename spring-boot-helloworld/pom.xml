@@ -22,7 +22,7 @@
 
     <artifactId>spring-boot-helloworld</artifactId>
 
-    <!--Spring Boot将所有的功能场景都抽取出来,做成一个个startess(启动器),只需引入这些starter,则相关场景的所有依赖都会导入进来(用什么功能就导入什么场景的启动器)-->
+    <!--Spring Boot将所有的功能场景都抽取出来,做成一个个starters(启动器),只需引入这些starter,则相关场景的所有依赖都会导入进来(用什么功能就导入什么场景的启动器)-->
     <dependencies>
         <!--spring-boot-starter:spring-boot场景启动器;spring-boot-starter-web:导入了web模块正常运行的所依赖的组件-->
         <dependency>
