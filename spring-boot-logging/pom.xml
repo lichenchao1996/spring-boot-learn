@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.8.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.licc</groupId>
+    <artifactId>spring-boot-logging</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-boot-logging</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!--排除logging,SpringBoot默认使用spring-boot-starter-logging-->
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+
+            <!--在这直接写排除就可以,但是在依赖视图中右键该依赖Exclude是灰色的...-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<artifactId>logback-classic</artifactId>-->
+                    <!--<groupId>ch.qos.logback</groupId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<artifactId>log4j-over-slf4j</artifactId>-->
+                    <!--<groupId>org.slf4j</groupId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        </dependency>
+
+        <!--适配层的包,本身依赖log4j-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-log4j12</artifactId>-->
+        <!--</dependency>-->
+
+        <!--使用log4j2,spring-boot-starter-log4j2与spring-boot-starter-logging二选一-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+<!--
+    1.SpringBoot底层也是使用slf4j+logback的方式进行日志记录
+    2.SpringBoot也把其他的日志都替换成了slf4j
+    3.中间的替换包(版本不同,包名都变了)
+    4.如果我们要引入其他框架?一定要把这个框架的默认框架依赖移除掉?
+        Spring框架用的是commons-logging(可能是springboot版本的问题,里面spring-core的依赖并没有排除(<exclusions></exclusions>)commons-logging的jar包)
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+          <version>5.1.9.RELEASE</version>
+          <scope>compile</scope>
+        </dependency>
+      SpringBoot能自动适配所有的日志,而且底层使用slf4j+logback的方式记录日志,引入其他框架的时候,只需要把这个框架以来的日志框架排除掉
+-->
+</project>
